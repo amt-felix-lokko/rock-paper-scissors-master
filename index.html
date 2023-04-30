@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <!-- <script src="/js/app.js" defer></script> -->
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+</head>
+<body>
+
+  <!-- Start of main -->
+  <div class="main">
+
+    <!-- Title and score -->
+    <div class="titleAndScore">
+      <div class="titleLogo">
+        <img src="./images/logo.svg" alt="image">
+      </div>
+
+      <div class="score">
+        <div class="scoreTitle">SCORE</div>
+        <div class="totalScore">0</div>
+      </div>
+    </div>
+
+    <!-- The game -->
+    <div class="game">
+      <div class="paperDiv">
+        <div class="icon">
+          <img src="./images/icon-paper.svg" class="paper" alt="image">
+        </div>
+      </div>
+      <div class="rockDiv">
+        <div class="icon">
+          <img src="./images/icon-rock.svg" class="rock" alt="image">
+        </div>
+      </div>
+      <div class="scissorsDiv">
+        <div class="icon">
+          <img src="./images/icon-scissors.svg" class="scissors" alt="image">
+        </div>
+      </div>
+    </div>
+
+    <!-- The game choices -->
+    <div class="choices">
+
+      <!-- The choice by user -->
+      <div class="youPicked">
+        <div class="pickedMsg">YOU PICKED</div>
+        <div class="paperChoice">
+          <div class="icon">
+            <img src="./images/icon-paper.svg" class="paper" alt="image">
+          </div>
+        </div>
+
+        <div class="scissorsChoice">
+          <div class="icon">
+            <img src="./images/icon-scissors.svg" class="scissors" alt="image">
+          </div>
+        </div>
+
+        <div class="rockChoice">
+          <div class="icon">
+            <img src="./images/icon-rock.svg" class="rock" alt="image">
+          </div>
+        </div>
+      </div>
+
+      <!-- The computer's choices -->
+      <div class="housePicked">
+        <div class="pickedMsg">THE HOUSE PICKED</div>
+          <div class="noChoiceYet">
+          </div>
+
+          <div class="paperChoice" id="computerPaper">
+            <div class="icon">
+              <img src="./images/icon-paper.svg" class="paper" alt="image">
+            </div>
+          </div>
+  
+          <div class="scissorsChoice" id="computerScissors">
+            <div class="icon">
+              <img src="./images/icon-scissors.svg" class="scissors" alt="image">
+            </div>
+          </div>
+  
+          <div class="rockChoice" id="computerRock">
+            <div class="icon">
+              <img src="./images/icon-rock.svg" class="rock" alt="image">
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div class="result">
+
+      <!-- User's picked results -->
+      <div class="youPicked">
+        <div class="pickedMsg">YOU PICKED</div>
+        <div class="paperChoice" id="paperResult">
+          <div class="icon">
+            <img src="./images/icon-paper.svg" class="paper" alt="image">
+          </div>
+        </div>
+
+        <div class="scissorsChoice" id="scissorsResult">
+          <div class="icon">
+            <img src="./images/icon-scissors.svg" class="scissors" alt="image">
+          </div>
+        </div>
+
+        <div class="rockChoice" id="rockResult">
+          <div class="icon">
+            <img src="./images/icon-rock.svg" class="rock" alt="image">
+          </div>
+        </div>
+      </div>
+
+      <div class="printResult winOrLose">
+        <div class="youWin">YOU WIN</div>
+        <div class="youLose">YOU LOSE</div>
+        <button class="playAgain">PLAY AGAIN</button>
+      </div>
+      
+      <!-- Computer's picked results -->
+      <div class="housePicked">
+        <div class="pickedMsg">THE HOUSE PICKED</div>
+          <div class="paperChoice" id="paperResultComputer">
+            <div class="icon">
+              <img src="./images/icon-paper.svg" class="paper" alt="image">
+            </div>
+          </div>
+  
+          <div class="scissorsChoice" id="scissorsResultComputer">
+            <div class="icon">
+              <img src="./images/icon-scissors.svg" class="scissors" alt="image">
+            </div>
+          </div>
+  
+          <div class="rockChoice" id="rockResultComputer">
+            <div class="icon">
+              <img src="./images/icon-rock.svg" class="rock" alt="image">
+            </div>
+          </div>
+      </div>
+    
+    </div>
+
+    <!-- Rules button -->
+    <div class="rules">
+      <div>RULES</div>
+    </div>
+
+
+  <!-- end of main -->
+  </div>
+
+  <!-- the rules popup -->
+  <div class="rulesPic">
+    <div class="rulesTitleClose">
+      <h4>RULES</h4>
+      <img src="./images/icon-close.svg" class="close" alt="image">
+    </div>
+     
+    <img src="./images/image-rules.svg" class="imgRules" alt="image">
+  </div>
+  
+  <!-- Attribution -->
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+   </div> -->
+</body>
+</html>
