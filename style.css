@@ -4,15 +4,17 @@
     --headerOutline: hsl(217, 16%, 45%);
 }
 
-html{
-    font-size:10px;
-}
 
 @font-face {
     font-family: Barlow;
     src: url(/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf);
 }
-  
+
+html,
+* {
+    font-size:10px;
+    font-family: Barlow;
+}
 
 body {
     margin: 0;
