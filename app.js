@@ -1,137 +1,207 @@
-const main = document.querySelector('.main');
-const paper = document.querySelector('.paperDiv');
-const scissors = document.querySelector('.scissorsDiv');
-const rock = document.querySelector('.rockDiv');
-const rules = document.querySelector('.rules');
-const rulesPic = document.querySelector('.rulesPic');
-const close = document.querySelector('.close');
+// Selecting elements from the DOM
+const mainElement = document.querySelector('.main');
+const paperElement = document.querySelector('.paperDiv');
+const scissorsElement = document.querySelector('.scissorsDiv');
+const rockElement = document.querySelector('.rockDiv');
+const rulesElement = document.querySelector('.rules');
+const rulesPicElement = document.querySelector('.rulesPic');
+const closeElement = document.querySelector('.close');
 
-// set the score with the value from localStorage, or 0 if there is no value
+// Initialize score from local storage or default to 0
 let score = localStorage.getItem('score') ? parseInt(localStorage.getItem('score')) : 0;
 
-// set the starting value of the score element
+// Update the total score on the page
 document.querySelector('.totalScore').innerHTML = score;
 
-// declaring variables
 let userChoice = "";
 let computerChoice = "";
-let whoWon = [];
+let winner = [];
 
-// for the rules popup / close
-rules.addEventListener('click', ()=>{
-    rulesPic.classList.toggle('displayFlex');
-    main.classList.toggle('darkBg');
+// Event listener for rules button
+rulesElement.addEventListener('click', () => {
+    rulesPicElement.classList.toggle('displayFlex');
+    mainElement.classList.toggle('darkBg');
 });
 
-close.addEventListener('click', ()=>{
-    rulesPic.classList.toggle('displayFlex');
-    main.classList.toggle('darkBg');
+// Event listener for close button
+closeElement.addEventListener('click', () => {
+    rulesPicElement.classList.toggle('displayFlex');
+    mainElement.classList.toggle('darkBg');
 });
 
-// /* Game */ 
-// game's logic
-paper.addEventListener('click', ()=>{
+// Event listeners for user choices
+paperElement.addEventListener('click', () => {
     userChoice = "Paper";
-    didUserChoose = true;
-    play(1,2); 
+    play(1, 2);
 });
 
-scissors.addEventListener('click', ()=>{
+scissorsElement.addEventListener('click', () => {
     userChoice = "Scissors";
-    didUserChoose = true;
-    play(1,2);
+    play(1, 2);
 });
 
-rock.addEventListener('click', ()=>{
+rockElement.addEventListener('click', () => {
     userChoice = "Rock";
-    didUserChoose = true;
-    play(1,2);
-})
+    play(1, 2);
+});
 
-// Controlling the display of elements related to the game interface.
-const play = (userC,computerC)=>{
+// Function to handle the game logic
+const play = (userChoiceIndex, computerChoiceIndex) => {
+    // Hide the game section and show the choices section
     document.querySelector('.game').style.display = "none";
     document.querySelector('.choices').style.display = "flex";
-    if(userChoice==='Paper'){
+
+    // Show the user's choice based on selection
+    if (userChoice === 'Paper') {
         document.querySelector('.paperChoice').style.display = "flex";
-    } else if(userChoice==='Rock'){
+    } else if (userChoice === 'Rock') {
         document.querySelector('.rockChoice').style.display = "flex";
-    } else if(userChoice==='Scissors'){
+    } else if (userChoice === 'Scissors') {
         document.querySelector('.scissorsChoice').style.display = "flex";
     }
 
-    // computer's choice determined randomly
-    let element = randomFigure();
-    while(element===userChoice){
-        element = randomFigure();
+    // Generate a random computer choice
+    let computerChoiceElement = randomFigure();
+    while (computerChoiceElement === userChoice) {
+        computerChoiceElement = randomFigure();
     }
-    computerChoice = element;
+    computerChoice = computerChoiceElement;
 
-    //delay computer's choice for 1 second before revealing the computer's selection
-    setTimeout(()=>{
-        document.getElementById(`computer${element}`).style.display = "flex";
+    // Show the computer's choice after a delay
+    setTimeout(() => {
+        document.getElementById(`computer${computerChoiceElement}`).style.display = "flex";
         document.querySelector('.noChoiceYet').style.display = "none";
-    },1000);
-    
-    // conditional statements to determine the outcome of the game based on either U/C choices
-    if(userChoice === "Paper" && computerChoice === "Scissors"){
-        whoWon.push("computer","scissors");
-    
-    } else if(userChoice === "Paper" && computerChoice === "Rock"){
-        whoWon.push("user","paper");
-    }
-    
-    if(userChoice === "Scissors" && computerChoice === "Paper"){
-        whoWon.push("user","scissors");
-    
-    } else if(userChoice === "Scissors" && computerChoice === "Rock"){
-        whoWon.push("computer","rock");
-    }
-    
-    if(userChoice === "Rock" && computerChoice === "Paper"){
-        whoWon.push("computer","paper");
-    
-    } else if(userChoice === "Rock" && computerChoice === "Scissors"){
-        whoWon.push("user","rock");
+    }, 1000);
+
+    // Determine the winner based on choices
+    if (userChoice === "Paper" && computerChoice === "Scissors") {
+        winner.push("computer", "scissors");
+    } else if (userChoice === "Paper" && computerChoice === "Rock") {
+        winner.push("user", "paper");
     }
 
-    // transition from the gameplay choices to displaying the result of the game.
-    setTimeout(()=>{
+    if (userChoice === "Scissors" && computerChoice === "Paper") {
+        winner.push("user", "scissors");
+    } else if (userChoice === "Scissors" && computerChoice === "Rock") {
+        winner.push("computer", "rock");
+    }
+
+    if (userChoice === "Rock" && computerChoice === "Paper") {
+        winner.push("computer", "paper");
+    } else if (userChoice === "Rock" && computerChoice === "Scissors") {
+        winner.push("user", "rock");
+    }
+
+    // Show the result after a delay
+    setTimeout(() => {
         document.querySelector('.choices').style.display = "none";
         document.querySelector('.result').style.display = "flex";
 
-    // Make elements visible by displaying their containers
-    switch(userChoice){
+        // Show user's and computer's choices
+        switch (userChoice) {
+            case 'Paper':
+                document.getElementById('paperResult').style.display = "flex";
+                break;
+            case 'Scissors':
+                document.getElementById('scissorsResult').style.display = "flex";
+                break;
+            case 'Rock':
+                document.getElementById('rockResult').style.display = "flex";
+                break;
+        }
+
+        switch (computerChoice) {
+            case 'Paper':
+                document.getElementById('paperResultComputer').style.display = "flex";
+                break;
+            case 'Scissors':
+                document.getElementById('scissorsResultComputer').style.display = "flex";
+                break;
+            case 'Rock':
+                document.getElementById('rockResultComputer').style.display = "flex";
+                break;
+        }
+
+        // Show the winner and update score
+        switch (winner[0]) {
+            case 'computer':
+                document.querySelector('.youLose').style.display = "block";
+                document.getElementById(`${winner[1]}ResultComputer`).classList.toggle("winnerBoxShadow");
+                break;
+            case "user":
+                document.querySelector('.youWin').style.display = "block";
+                document.getElementById(`${winner[1]}Result`).classList.toggle("winnerBoxShadow");
+        }
+
+        const updateScore = (newScore) => {
+            score = newScore;
+            localStorage.setItem('score', newScore);
+            document.querySelector('.totalScore').innerHTML = score;
+        };
+
+        if (winner[0] === 'user') {
+            updateScore(score + 1);
+        } else if (winner[0] === 'computer') {
+            updateScore(score - 1);
+        }
+    }, 2500);
+}
+
+// Event listener for play again button
+document.querySelector('.playAgain').addEventListener('click', () => {
+    // Hide the previous choices and result
+    switch (computerChoice) {
         case 'Paper':
-            document.getElementById('paperResult').style.display = "flex";
+            document.getElementById('paperResultComputer').style.display = "none";
+            document.getElementById('computerPaper').style.display = "none";
             break;
         case 'Scissors':
-            document.getElementById('scissorsResult').style.display = "flex";
+            document.getElementById('scissorsResultComputer').style.display = "none";
+            document.getElementById('computerScissors').style.display = "none";
             break;
         case 'Rock':
-            document.getElementById('rockResult').style.display = "flex";
+            document.getElementById('rockResultComputer').style.display = "none";
+            document.getElementById('computerRock').style.display = "none";
             break;
     }
 
-    switch(computerChoice){
+    switch (userChoice) {
         case 'Paper':
-            document.getElementById('paperResultComputer').style.display = "flex";
+            document.getElementById('paperResult').style.display = "none";
+            document.querySelector('.paperChoice').style.display = "none";
             break;
         case 'Scissors':
-            document.getElementById('scissorsResultComputer').style.display = "flex";
+            document.getElementById('scissorsResult').style.display = "none";
+            document.querySelector('.scissorsChoice').style.display = "none";
             break;
         case 'Rock':
-            document.getElementById('rockResultComputer').style.display = "flex";
+            document.getElementById('rockResult').style.display = "none";
+            document.querySelector('.rockChoice').style.display = "none";
             break;
     }
 
-    switch(whoWon[0]){
+    switch (winner[0]) {
         case 'computer':
-            document.querySelector('.youLose').style.display = "block";
-            document.getElementById(`${whoWon[1]}ResultComputer`).classList.toggle("winnerBoxShadow");
+            document.querySelector('.youLose').style.display = "none";
+            document.getElementById(`${winner[1]}ResultComputer`).classList.toggle("winnerBoxShadow");
             break;
         case "user":
-            document.querySelector('.youWin').style.display = "block";
-            document.getElementById(`${whoWon[1]}Result`).classList.toggle("winnerBoxShadow");
+            document.querySelector('.youWin').style.display = "none";
+            document.getElementById(`${winner[1]}Result`).classList.toggle("winnerBoxShadow");
     }
 
+    // Reset variables and show the game section
+    document.querySelector('.noChoiceYet').style.display = "flex";
+    computerChoice = "";
+    userChoice = "";
+    winner = [];
+    document.querySelector('.result').style.display = "none";
+    document.querySelector('.game').style.display = "flex";
+});
+
+// Function to generate a random figure for the computer
+const randomFigure = () => {
+    let figures = ['Paper', 'Rock', 'Scissors'];
+    let chosenFigure = figures[Math.floor(Math.random() * figures.length)];
+    return chosenFigure;
+};
