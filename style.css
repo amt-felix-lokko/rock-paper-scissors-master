@@ -10,9 +10,12 @@
     src: url(/Barlow_Semi_Condensed/BarlowSemiCondensed-Regular.ttf);
 }
 
-html,
-* {
+html{
     font-size:10px;
+    font-family: Barlow;
+}
+
+* {
     font-family: Barlow;
 }
 
